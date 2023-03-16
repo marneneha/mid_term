@@ -18,7 +18,7 @@ while(cap.isOpened()):
         print("m here")
         circles = np.uint16(np.around(circles)) 
         chosen = circles[0,0]
-        cv2.circle(frame, (chosen[0], chosen[1]), chosen[2], (255, 0, 255), 3)
+        cv2.circle(frame, (chosen[0], chosen[1]), chosen[2], (255, 0, 0), 2)
     if ret == True:
         # Display the resulting frame
         cv2.imshow('Frame',frame)
