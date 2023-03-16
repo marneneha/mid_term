@@ -11,15 +11,20 @@ if (cap.isOpened()==False):
 while(cap.isOpened()):
     # Capture frame-by-frame
     ret, frame = cap.read()
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    blurred = cv2.GaussianBlur(gray_frame, (5,5), 0) 
+    circles = cv2.HoughCircles(blurred, cv2.HOUGH_GRADIENT, 1.2, 100, param1=100, param2=30, minRadius=0, maxRadius=15) 
+    if circles is not None:
+        print("m here")
+        circles = np.uint16(np.around(circles)) 
+        chosen = circles[0,0]
+        cv2.circle(frame, (chosen[0], chosen[1]), chosen[2], (255, 0, 255), 3)
     if ret == True:
-    
         # Display the resulting frame
         cv2.imshow('Frame',frame)
-    
         # Press Q on keyboard to  exit
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
-    
     # Break the loop
     else: 
         break
